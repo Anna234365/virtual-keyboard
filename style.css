@@ -67,7 +67,7 @@ html {
 .button {
     height: 50px;
     border: 1px solid rgb(146, 72, 128);
-    border-radius: 5px;;
+    border-radius: 5px;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -100,7 +100,7 @@ html {
     position: absolute;
     top:0;
     left:0;
-    margin: 4px 6px;;
+    margin: 4px 6px;
 }
 
 #Backspace {
