@@ -314,6 +314,8 @@ class Keyboards {
   }
 
   changeLanguage() {
+    let CapsLockActive = document.getElementById(`${event.code}`).classList.contains('active');
+    
     if (this.language === 'RU') {
       this.language = 'EN';
       localStorage.languageAAA = 'EN';
@@ -331,6 +333,8 @@ class Keyboards {
     });
     this.createButtons();
     this.addButtonText();
+
+    if (CapsLockActive) {document.getElementById('CapsLock').classList.add('active')}
   }
 }
 
