@@ -314,7 +314,7 @@ class Keyboards {
   }
 
   changeLanguage() {
-    let CapsLockActive = document.getElementById(`${event.code}`).classList.contains('active');
+    let CapsLockActive = document.getElementById('CapsLock').classList.contains('active');
     
     if (this.language === 'RU') {
       this.language = 'EN';
