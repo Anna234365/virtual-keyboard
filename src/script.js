@@ -300,17 +300,14 @@ class Keyboards {
   }
 
   setLanguage() {
-    if (localStorage.getItem('languageAAA') == undefined) {
-      localStorage.setItem('languageAAA', 'EN');
-    }
 
-    if (localStorage.getItem('languageAAA') === 'EN') {
-      this.language = 'EN';
-      this.ALL_KEYS = ENline1.concat(ENline2, ENline3, ENline4, line5);
-    } else if (localStorage.getItem('languageAAA') === 'RU') {
-      localStorage.setItem('languageAAA', 'EN');
+    if (localStorage.getItem('languageAAA') === 'RU') {
       this.language = 'RU';
       this.ALL_KEYS = RUline1.concat(RUline2, RUline3, RUline4, line5);
+    } else {
+      localStorage.setItem('languageAAA', 'EN');
+      this.language = 'EN';
+      this.ALL_KEYS = ENline1.concat(ENline2, ENline3, ENline4, line5);
     }
   }
 
