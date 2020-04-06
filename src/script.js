@@ -300,7 +300,7 @@ class Keyboards {
   }
 
   setLanguage() {
-    if (localStorage.getItem('languageAAA') === undefined) {
+    if (localStorage.getItem('languageAAA') == undefined) {
       localStorage.setItem('languageAAA', 'EN');
     }
 
@@ -308,14 +308,15 @@ class Keyboards {
       this.language = 'EN';
       this.ALL_KEYS = ENline1.concat(ENline2, ENline3, ENline4, line5);
     } else if (localStorage.getItem('languageAAA') === 'RU') {
+      localStorage.setItem('languageAAA', 'EN');
       this.language = 'RU';
       this.ALL_KEYS = RUline1.concat(RUline2, RUline3, RUline4, line5);
     }
   }
 
   changeLanguage() {
-    let CapsLockActive = document.getElementById('CapsLock').classList.contains('active');
-    
+    const CapsLockActive = document.getElementById('CapsLock').classList.contains('active');
+
     if (this.language === 'RU') {
       this.language = 'EN';
       localStorage.languageAAA = 'EN';
@@ -334,7 +335,7 @@ class Keyboards {
     this.createButtons();
     this.addButtonText();
 
-    if (CapsLockActive) {document.getElementById('CapsLock').classList.add('active')}
+    if (CapsLockActive) { document.getElementById('CapsLock').classList.add('active') }
   }
 }
 
