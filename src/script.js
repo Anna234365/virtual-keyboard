@@ -263,7 +263,7 @@ class Keyboards {
       } else {
         this.CapsLockStatus = false;
       }
-    } else if (AllCodesAndKeys[event.target.id][0] === 'Shift') { // придумать обработку активного шифта
+    } else if (AllCodesAndKeys[event.target.id][0] === 'Shift') {
       if (this.shiftStatus === true) {
         this.shiftStatus = false;
         ShiftLeft.classList.remove('active');
