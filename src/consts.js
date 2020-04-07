@@ -4,7 +4,7 @@ export const ENline1 = [['`', '~'], ['1', '!'], ['2', '@'], ['3', '#'], ['4', '$
 export const ENline2 = ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', ['[', '{'], [']', '}'], ['\\', '|']];
 export const ENline3 = ['CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', [';', ':'], ['\'', '"'], 'ENTER'];
 export const ENline4 = ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', [',', '<'], ['.', '>'], ['/', '?'], '&uarr;', 'Shift'];
-export const line5 = ['Ctrl', 'Win', 'Alt', '&ensp;', 'Alt', 'Ctrl', ' &larr;', '&darr;', '&rarr;'];
+export const line5 = ['Ctrl', 'Win', 'Alt', '&ensp;', 'Alt', 'Ctrl', '&larr;', '&darr;', '&rarr;'];
 
 export const RUline1 = ['Ё', ['1', '!'], ['2', '"'], ['3', '№'], ['4', ';'], ['5', '%'], ['6', ':'], ['7', '?'], ['8', '*'], ['9', '('], ['0', ')'], ['-', '_'], ['=', '+'], 'Backspace'];
 export const RUline2 = ['Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', ['\\', '/']];
