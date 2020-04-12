@@ -84,14 +84,17 @@ class Keyboards {
 
     this.printedText.focus();
 
-    if (AllCodesAndKeys[event.code][0] === 'CapsLock') {
-      if (document.getElementById(`${event.code}`).classList.contains('active')) {
-        document.getElementById(`${event.code}`).classList.remove('active');
+    const pressedKey = document.getElementById(`${event.code}`);
+    const activeKey = AllCodesAndKeys[event.code];
+
+    if (activeKey[0] === 'CapsLock') {
+      if (pressedKey.classList.contains('active')) {
+        pressedKey.classList.remove('active');
       } else {
-        document.getElementById(`${event.code}`).classList.add('active');
+        pressedKey.classList.add('active');
       }
     } else {
-      document.getElementById(`${event.code}`).classList.add('active');
+      pressedKey.classList.add('active');
     }
 
     if (document.getElementById('ShiftLeft').classList.contains('active') && document.getElementById('ControlLeft').classList.contains('active')) {
@@ -103,49 +106,49 @@ class Keyboards {
       this.printedText.value += document.getElementById(`${event.code}`).innerHTML;
     }
 
-    if (this.language === 'EN' && AllCodesAndKeys[event.code][1] !== 'controlButton') {
-      if (this.shiftStatus === false && this.CapsLockStatus === false) {
-        this.printedText.value += AllCodesAndKeys[event.code][0];
-      } else if (this.shiftStatus === true && this.CapsLockStatus === false) {
-        this.printedText.value += AllCodesAndKeys[event.code][1];
-      } else if (this.shiftStatus === false && this.CapsLockStatus === true) {
+    if (this.language === 'EN' && activeKey[1] !== 'controlButton') {
+      if (!this.shiftStatus && !this.CapsLockStatus) {
+        this.printedText.value += activeKey[0];
+      } else if (this.shiftStatus && !this.CapsLockStatus) {
+        this.printedText.value += activeKey[1];
+      } else if (!this.shiftStatus && this.CapsLockStatus) {
         if (!event.code.match(/(Digit)[0-9]/) && !event.code.match(/.*(ash)/) && event.code !== 'Backquote') {
-          this.printedText.value += AllCodesAndKeys[event.code][1];
+          this.printedText.value += activeKey[1];
         } else {
-          this.printedText.value += AllCodesAndKeys[event.code][0];
+          this.printedText.value += activeKey[0];
         }
-      } else if (this.shiftStatus === true && this.CapsLockStatus === true) {
+      } else if (this.shiftStatus && this.CapsLockStatus) {
         if (!event.code.match(/(Digit)[0-9]/) && !event.code.match(/.*(ash)/) && event.code !== 'Backquote') {
-          this.printedText.value += AllCodesAndKeys[event.code][0];
+          this.printedText.value += activeKey[0];
         } else {
-          this.printedText.value += AllCodesAndKeys[event.code][1];
+          this.printedText.value += activeKey[1];
         }
       }
-    } else if (this.language === 'RU' && AllCodesAndKeys[event.code][1] !== 'controlButton') {
-      if (this.shiftStatus === false && this.CapsLockStatus === false) {
-        this.printedText.value += AllCodesAndKeys[event.code][2];
-      } else if (this.shiftStatus === true && this.CapsLockStatus === false) {
-        this.printedText.value += AllCodesAndKeys[event.code][3];
-      } else if (this.shiftStatus === false && this.CapsLockStatus === true) {
+    } else if (this.language === 'RU' && activeKey[1] !== 'controlButton') {
+      if (!this.shiftStatus && !this.CapsLockStatus) {
+        this.printedText.value += activeKey[2];
+      } else if (this.shiftStatus && !this.CapsLockStatus) {
+        this.printedText.value += activeKey[3];
+      } else if (!this.shiftStatus && this.CapsLockStatus) {
         if (!event.code.match(/(Digit)[0-9]/) && !event.code.match(/.*(ash)/)) {
-          this.printedText.value += AllCodesAndKeys[event.code][3];
+          this.printedText.value += activeKey[3];
         } else {
-          this.printedText.value += AllCodesAndKeys[event.code][2];
+          this.printedText.value += activeKey[2];
         }
-      } else if (this.shiftStatus === true && this.CapsLockStatus === true) {
+      } else if (this.shiftStatus && this.CapsLockStatus) {
         if (!event.code.match(/(Digit)[0-9]/) && !event.code.match(/.*(ash)/)) {
-          this.printedText.value += AllCodesAndKeys[event.code][2];
+          this.printedText.value += activeKey[2];
         } else {
-          this.printedText.value += AllCodesAndKeys[event.code][3];
+          this.printedText.value += activeKey[3];
         }
       }
     } else if (event.code === 'CapsLock') {
-      if (this.CapsLockStatus === false) {
-        this.CapsLockStatus = true;
-      } else {
+      if (this.CapsLockStatus) {
         this.CapsLockStatus = false;
+      } else {
+        this.CapsLockStatus = true;
       }
-    } else if (AllCodesAndKeys[event.code][0] === 'Shift') {
+    } else if (activeKey[0] === 'Shift') {
       this.shiftStatus = true;
     } else if (event.code === 'Backspace') {
       this.printedText.value = this.printedText.value.slice(0, -1);
@@ -156,6 +159,7 @@ class Keyboards {
 
   RealKeyUp(event) {
     event.preventDefault();
+    const activeKey = AllCodesAndKeys[event.code];
 
     if (!codesArray.includes(event.code)) { return; }
 
@@ -163,10 +167,10 @@ class Keyboards {
       document.querySelector('.bill').style.display = 'none';
     }
 
-    if (AllCodesAndKeys[event.code][0] === 'Shift') {
+    if (activeKey[0] === 'Shift') {
       this.shiftStatus = false;
     }
-    if (AllCodesAndKeys[event.code][0] !== 'CapsLock') {
+    if (activeKey[0] !== 'CapsLock') {
       document.getElementById(`${event.code}`).classList.remove('active');
     }
   }
@@ -174,9 +178,9 @@ class Keyboards {
   MouseDown(event) {
     const ShiftLeft = document.getElementById('ShiftLeft');
     const ShiftRight = document.getElementById('ShiftRight');
+    const activeKey = AllCodesAndKeys[event.target.id];
 
     if (!event.target.classList.contains('button') && !event.target.parentNode.classList.contains('button')) { return; }
-    if (!event.target.classList === undefined) { return; }
 
     if (event.target.id === 'CapsLock') {
       if (event.target.classList.contains('active')) {
@@ -196,75 +200,75 @@ class Keyboards {
       return;
     }
 
-    if (event.target.parentNode.classList.contains('doubleInputButton') && this.shiftStatus === false) {
+    if (event.target.parentNode.classList.contains('doubleInputButton') && !this.shiftStatus) {
       this.printedText.value += AllCodesAndKeys[event.target.parentNode.id][0];
-    } else if (event.target.parentNode.classList.contains('doubleInputButton') && this.shiftStatus === true) {
+    } else if (event.target.parentNode.classList.contains('doubleInputButton') && this.shiftStatus) {
       this.printedText.value += AllCodesAndKeys[event.target.parentNode.id][1];
 
       this.shiftStatus = false;
       ShiftLeft.classList.remove('active');
       ShiftRight.classList.remove('active');
-    } else if (this.language === 'EN' && AllCodesAndKeys[event.target.id][1] !== 'controlButton') {
-      if (this.shiftStatus === false && this.CapsLockStatus === false) {
-        this.printedText.value += AllCodesAndKeys[event.target.id][0];
-      } else if (this.shiftStatus === true && this.CapsLockStatus === false) {
-        this.printedText.value += AllCodesAndKeys[event.target.id][1];
+    } else if (this.language === 'EN' && activeKey[1] !== 'controlButton') {
+      if (!this.shiftStatus && !this.CapsLockStatus) {
+        this.printedText.value += activeKey[0];
+      } else if (this.shiftStatus && !this.CapsLockStatus) {
+        this.printedText.value += activeKey[1];
         this.shiftStatus = false;
         ShiftLeft.classList.remove('active');
         ShiftRight.classList.remove('active');
-      } else if (this.shiftStatus === false && this.CapsLockStatus === true) {
+      } else if (!this.shiftStatus && this.CapsLockStatus) {
         if (!event.target.id.match(/(Digit)[0-9]/) && !event.target.id.match(/.*(ash)/)) {
-          this.printedText.value += AllCodesAndKeys[event.target.id][1];
+          this.printedText.value += activeKey[1];
         } else {
-          this.printedText.value += AllCodesAndKeys[event.target.id][0];
+          this.printedText.value += activeKey[0];
         }
-      } else if (this.shiftStatus === true && this.CapsLockStatus === true) {
+      } else if (this.shiftStatus && this.CapsLockStatus) {
         if (!event.target.id.match(/(Digit)[0-9]/) && !event.target.id.match(/.*(ash)/)) {
-          this.printedText.value += AllCodesAndKeys[event.target.id][0];
+          this.printedText.value += activeKey[0];
         } else {
-          this.printedText.value += AllCodesAndKeys[event.target.id][1];
+          this.printedText.value += activeKey[1];
         }
 
         this.shiftStatus = false;
         ShiftLeft.classList.remove('active');
         ShiftRight.classList.remove('active');
       }
-    } else if (this.language === 'RU' && AllCodesAndKeys[event.target.id][1] !== 'controlButton') {
-      if (this.shiftStatus === false && this.CapsLockStatus === false) {
-        this.printedText.value += AllCodesAndKeys[event.target.id][2];
-      } else if (this.shiftStatus === true && this.CapsLockStatus === false) {
-        this.printedText.value += AllCodesAndKeys[event.target.id][3];
+    } else if (this.language === 'RU' && activeKey[1] !== 'controlButton') {
+      if (!this.shiftStatus && !this.CapsLockStatus) {
+        this.printedText.value += activeKey[2];
+      } else if (this.shiftStatus && !this.CapsLockStatus) {
+        this.printedText.value += activeKey[3];
 
         this.shiftStatus = false;
         ShiftLeft.classList.remove('active');
         ShiftRight.classList.remove('active');
-      } else if (this.shiftStatus === false && this.CapsLockStatus === true) {
+      } else if (!this.shiftStatus && this.CapsLockStatus) {
         if (!event.target.id.match(/(Digit)[0-9]/) && !event.target.id.match(/.*(ash)/)) {
-          this.printedText.value += AllCodesAndKeys[event.target.id][3];
+          this.printedText.value += activeKey[3];
         } else {
-          this.printedText.value += AllCodesAndKeys[event.target.id][2];
+          this.printedText.value += activeKey[2];
         }
-      } else if (this.shiftStatus === true && this.CapsLockStatus === true) {
+      } else if (this.shiftStatus && this.CapsLockStatus) {
         if (!event.target.id.match(/(Digit)[0-9]/) && !event.target.id.match(/.*(ash)/)) {
-          this.printedText.value += AllCodesAndKeys[event.target.id][2];
+          this.printedText.value += activeKey[2];
           this.shiftStatus = false;
           ShiftLeft.classList.remove('active');
           ShiftRight.classList.remove('active');
         } else {
-          this.printedText.value += AllCodesAndKeys[event.target.id][3];
+          this.printedText.value += activeKey[3];
           this.shiftStatus = false;
           ShiftLeft.classList.remove('active');
           ShiftRight.classList.remove('active');
         }
       }
     } else if (event.target.id === 'CapsLock') {
-      if (this.CapsLockStatus === false) {
-        this.CapsLockStatus = true;
-      } else {
+      if (this.CapsLockStatus) {
         this.CapsLockStatus = false;
+      } else {
+        this.CapsLockStatus = true;
       }
-    } else if (AllCodesAndKeys[event.target.id][0] === 'Shift') {
-      if (this.shiftStatus === true) {
+    } else if (activeKey[0] === 'Shift') {
+      if (this.shiftStatus) {
         this.shiftStatus = false;
         ShiftLeft.classList.remove('active');
         ShiftRight.classList.remove('active');
@@ -282,10 +286,10 @@ class Keyboards {
 
   MouseUp(event) {
     if (event.target.id !== 'CapsLock' && !event.target.id.match(/.*(Shift)/)) {
-      if (event.target.classList !== undefined) {
+      if (event.target.classList) {
         event.target.classList.remove('active');
       }
-      if (event.target.parentNode.classList !== undefined) {
+      if (event.target.parentNode.classList) {
         event.target.parentNode.classList.remove('active');
       }
     }
@@ -293,7 +297,7 @@ class Keyboards {
   }
 
   MouseOut(event) {
-    if (event.target.id !== 'CapsLock' && !event.target.id.match(/.*(Shift)/) && event.target !== null) {
+    if (event.target.id !== 'CapsLock' && !event.target.id.match(/.*(Shift)/)) {
       event.target.classList.remove('active');
     }
     this.printedText.focus();
