@@ -7,13 +7,13 @@
 html {
     font-size: 10px;
     background-color: rgb(221, 255, 244);
+    font-family: "Roboto", sans-serif;
 }
 
 .virtualDisplay {
     top: 20px;
     display: flex;
     margin: 0 auto;
-    font-family: "Roboto";
     width: 924px;
     position: relative;
     padding-left: 48px;
@@ -44,7 +44,7 @@ html {
     background-color: rgb(43, 179, 133);
     display: flex;
     flex-wrap: wrap;
-    padding: 40px 30px 15px 30px;
+    padding: 40px 30px 15px;
     width: 884px;
     margin: auto;
     border-radius: 5px;
@@ -58,7 +58,6 @@ html {
     font-size: 1.6rem;
     padding: 5px 20px;
     text-align: left;
-    font-family: "Roboto";
     font-weight: 500;
     user-select: none;
     height: 100vh;
@@ -74,7 +73,6 @@ html {
     color: rgb(216, 219, 39);
     margin: 3px;
     background-color: rgb(146, 72, 128);
-    font-family: "Roboto";
     font-weight: 500;
     display: flex;
     font-size: 1.6rem;

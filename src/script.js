@@ -316,11 +316,11 @@ class Keyboards {
 
     if (this.language === 'RU') {
       this.language = 'EN';
-      localStorage.languageAAA = 'EN';
+      localStorage.setItem('languageAAA', 'EN');
       this.ALL_KEYS = ENline1.concat(ENline2, ENline3, ENline4, line5);
     } else if (this.language === 'EN') {
       this.language = 'RU';
-      localStorage.languageAAA = 'RU';
+      localStorage.setItem('languageAAA', 'RU');
       this.ALL_KEYS = RUline1.concat(RUline2, RUline3, RUline4, line5);
     }
 
